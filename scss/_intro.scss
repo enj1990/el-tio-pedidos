@@ -5,13 +5,13 @@
   position: fixed;
   inset: 0;
   z-index: 50;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
+  display: flex;
+  overflow-y: auto; // si la pantalla es baja, se puede bajar hasta el botón
+  overscroll-behavior: contain;
   background: $black;
 
   &__bg {
-    position: absolute;
+    position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
@@ -22,7 +22,7 @@
 
   &::after {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
     background: linear-gradient(180deg, rgba($black, .2), rgba($black, .85) 55%, $black);
   }
@@ -31,6 +31,7 @@
     position: relative;
     z-index: 1;
     width: min(100%, 420px);
+    margin: auto; // centra sin cortar arriba cuando no entra
     padding: 24px $gutter calc(24px + env(safe-area-inset-bottom));
     text-align: center;
   }
@@ -140,6 +141,15 @@
     }
 
     &:active { transform: translateY(4px); box-shadow: 0 2px 0 $red-dark; }
+  }
+
+  // Pantallas bajas (notebook, celular chico): todo más compacto para que el botón se vea sin bajar.
+  @media (max-height: 760px) {
+    &__logo { width: 84px; height: 84px; margin-bottom: 8px; }
+    &__title { margin: 4px 0 14px; font-size: 2.6rem; }
+    &__steps { gap: 6px; margin-bottom: 16px; }
+    &__steps li { padding: 7px 12px; font-size: .95rem; }
+    &__go { padding: 14px; font-size: 1.4rem; }
   }
 
   &.is-out { animation: out .5s cubic-bezier(.7, 0, .3, 1) forwards; }
