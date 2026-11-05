@@ -1,0 +1,155 @@
+@use 'tokens' as *;
+
+// Portada animada: logo, título con pincel, 3 pasos y botón.
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: $black;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .4;
+    animation: zoom 14s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba($black, .2), rgba($black, .85) 55%, $black);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 420px);
+    padding: 24px $gutter calc(24px + env(safe-area-inset-bottom));
+    text-align: center;
+  }
+
+  &__logo {
+    width: 128px;
+    height: 128px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    border: 4px solid $white;
+    box-shadow: 0 0 0 6px $red, 0 18px 40px rgba($red, .5);
+    animation: pop .8s cubic-bezier(.3, 1.6, .5, 1) both, float 3s 1s ease-in-out infinite;
+  }
+
+  &__kicker {
+    font: 1.3rem/1.2 $font-brush;
+    color: $yellow;
+    transform: rotate(-3deg);
+    animation: slide .5s .5s both;
+  }
+
+  &__title {
+    margin: 6px 0 22px;
+    font: 3.6rem/.95 $font-display;
+    text-transform: uppercase;
+    animation: slide .5s .65s both;
+
+    span {
+      display: inline-block;
+      padding: 6px 18px 10px;
+      background: brush($red) center / 100% 100% no-repeat;
+      clip-path: inset(0 100% 0 0);
+      animation: reveal .5s .95s ease-out forwards;
+    }
+  }
+
+  &__steps {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 26px;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: rgba($coal, .85);
+      border: 1px solid $line;
+      border-radius: $radius;
+      font-weight: 600;
+      font-size: 1.05rem;
+      animation: up .45s both;
+
+      &:nth-child(1) { animation-delay: 1.2s; }
+      &:nth-child(2) { animation-delay: 1.35s; }
+      &:nth-child(3) { animation-delay: 1.5s; }
+    }
+
+    b {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: $orange;
+      font: 1rem/1 $font-display;
+    }
+
+    i {
+      display: inline-grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: $red;
+      font-style: normal;
+      font-weight: 700;
+    }
+  }
+
+  &__go {
+    position: relative;
+    width: 100%;
+    padding: 18px;
+    border: 0;
+    border-radius: 999px;
+    background: $red;
+    color: $white;
+    font: 1.6rem/1 $font-display;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    box-shadow: 0 6px 0 $red-dark;
+    animation: pop .5s 1.75s cubic-bezier(.3, 1.6, .5, 1) both;
+
+    // anillo que late para llamar al toque
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 3px solid $red;
+      animation: ring 1.6s 2.3s ease-out infinite;
+    }
+
+    &:active { transform: translateY(4px); box-shadow: 0 2px 0 $red-dark; }
+  }
+
+  &.is-out { animation: out .5s cubic-bezier(.7, 0, .3, 1) forwards; }
+}
+
+@keyframes zoom { to { transform: scale(1.15); } }
+@keyframes pop { from { transform: scale(0) rotate(-12deg); opacity: 0; } }
+@keyframes float { 50% { transform: translateY(-6px); } }
+@keyframes slide { from { transform: translateX(-30px); opacity: 0; } }
+@keyframes reveal { to { clip-path: inset(0 0 0 0); } }
+@keyframes up { from { transform: translateY(16px); opacity: 0; } }
+@keyframes ring { to { transform: scale(1.15, 1.5); opacity: 0; } }
+@keyframes out { to { transform: translateY(-100%); } }

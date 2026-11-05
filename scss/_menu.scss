@@ -1,0 +1,370 @@
+@use 'tokens' as *;
+
+/* ---------- Header ---------- */
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: $max;
+  margin: 0 auto;
+  padding: calc(10px + env(safe-area-inset-top)) $gutter 6px;
+
+  &__logo { width: 40px; height: 40px; border-radius: 50%; border: 2px solid $white; }
+
+  &__name {
+    flex: 1;
+    font: 1.5rem/1 $font-brush;
+
+    span { display: block; margin-top: 2px; font: 600 .72rem/1 $font-body; letter-spacing: .08em; text-transform: uppercase; color: $muted; }
+  }
+
+  &__wa {
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: $whatsapp;
+    font-weight: 700;
+    font-size: .8rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Pestañas tipo historias ---------- */
+
+.tabs {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  // Al achicar la pantalla bajan de a una, hasta quedar 4 arriba y 3 abajo.
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 4px;
+  padding: 10px $gutter 8px;
+  background: rgba($black, .92);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid $red;
+}
+
+.tab {
+  flex: 0 0 88px;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+
+  // en celular angosto no bajan más: quedan 4 arriba y 3 abajo
+  @media (max-width: 420px) {
+    flex-basis: calc(25% - 3px);
+    min-width: 0;
+
+    .tab__label { font-size: .6rem; letter-spacing: 0; }
+    .tab__pic img { width: 52px; height: 52px; }
+  }
+  padding: 0 2px;
+  border: 0;
+  background: none;
+
+  &__pic {
+    position: relative;
+    padding: 3px;
+    border-radius: 50%;
+    background: $line;
+    transition: transform .2s;
+
+    img { width: 58px; height: 58px; border-radius: 50%; border: 2px solid $black; object-fit: cover; }
+
+    em {
+      position: absolute;
+      top: -4px;
+      right: -6px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: $yellow;
+      color: $black;
+      font: .8rem/1.2 $font-display;
+      font-style: normal;
+      transform: rotate(8deg);
+    }
+  }
+
+  &__label {
+    font-weight: 700;
+    font-size: .72rem;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: $muted;
+  }
+
+  &[aria-current="true"] &__pic {
+    background: conic-gradient($red, $orange, $yellow, $red);
+    transform: scale(1.06);
+  }
+
+  &[aria-current="true"] &__label { color: $white; }
+
+  // ya tiene algo de esta categoría en el pedido
+  &.has-items &__pic::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $whatsapp;
+    border: 2px solid $black;
+  }
+}
+
+/* ---------- Panel de categoría ---------- */
+
+.panels {
+  max-width: $max;
+  margin: 0 auto;
+  padding: 14px $gutter 0;
+  overflow-x: clip;
+}
+
+.panel {
+  &.from-right { animation: in-right .3s ease-out; }
+  &.from-left { animation: in-left .3s ease-out; }
+
+  &__head {
+    position: relative;
+    overflow: hidden;
+    border-radius: $radius;
+
+    img { width: 100%; height: 140px; object-fit: cover; }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba($black, .85), rgba($black, .1) 75%);
+    }
+
+    @include wide { img { height: 200px; } }
+  }
+
+  &__title {
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    bottom: 34px;
+    padding: 4px 16px 8px;
+    background: brush($red) center / 100% 100% no-repeat;
+    font: 1.9rem/1 $font-display;
+    text-transform: uppercase;
+  }
+
+  &__note {
+    position: absolute;
+    z-index: 1;
+    left: 18px;
+    bottom: 10px;
+    font: 1rem/1 $font-brush;
+    color: $yellow;
+    transform: rotate(-2deg);
+  }
+
+  &__tip {
+    margin: 12px 0 0;
+    padding: 8px 12px;
+    border-left: 4px solid $orange;
+    background: rgba($orange, .1);
+    border-radius: 0 10px 10px 0;
+    font-size: .9rem;
+  }
+
+  &__swipe {
+    margin: 18px 0 0;
+    text-align: center;
+    font: .95rem/1 $font-brush;
+    color: $muted;
+
+    @media (hover: hover) { display: none; }
+  }
+}
+
+@keyframes in-right { from { transform: translateX(40px); opacity: 0; } }
+@keyframes in-left { from { transform: translateX(-40px); opacity: 0; } }
+
+/* ---------- Productos ---------- */
+
+.cards {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+
+  @include wide { grid-template-columns: 1fr 1fr; }
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 14px;
+  background: $coal;
+  border: 1px solid $line;
+  border-radius: $radius;
+
+  &--wide { flex-direction: column; align-items: stretch; }
+
+  &__info { flex: 1; min-width: 0; }
+
+  &__name { font-weight: 700; font-size: 1.05rem; line-height: 1.2; }
+
+  &__desc {
+    margin-top: 3px;
+    color: $muted;
+    font-size: .85rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    cursor: pointer;
+
+    &.is-open { display: block; }
+  }
+
+  &__price {
+    margin-top: 6px;
+    font: 1.25rem/1 $font-display;
+    letter-spacing: .02em;
+    color: $orange;
+
+    small { margin-left: 6px; font: 700 .8rem/1 $font-body; color: $yellow; }
+  }
+}
+
+.sizes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.size {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 6px 6px 6px 10px;
+  background: $coal-2;
+  border-radius: 12px;
+
+  &__label {
+    display: grid;
+    gap: 3px;
+    font-weight: 700;
+    font-size: .75rem;
+    text-transform: uppercase;
+    color: $muted;
+
+    b { font: 1.2rem/1 $font-display; color: $orange; }
+  }
+
+  // ya elegido: precio arriba, contador abajo, para que entre en pantallas angostas
+  &:has(.stepper:not([data-qty="0"])) { flex-direction: column; align-items: stretch; padding: 8px; }
+  &:has(.stepper:not([data-qty="0"])) .stepper { justify-content: space-between; }
+
+  .stepper { gap: 2px; }
+  .stepper__btn--plus { width: 40px; height: 40px; }
+  .stepper__btn--minus { width: 30px; height: 30px; }
+}
+
+// En 0 solo se ve el "+": un toque y listo.
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  &__btn {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    line-height: 1;
+    transition: transform .1s;
+
+    &:active { transform: scale(.88); }
+
+    &--plus {
+      border: 0;
+      background: $red;
+      box-shadow: 0 4px 14px rgba($red, .45);
+    }
+
+    &--minus {
+      width: 38px;
+      height: 38px;
+      border: 2px solid $muted;
+      background: transparent;
+      font-size: 1.3rem;
+    }
+  }
+
+  &__qty {
+    min-width: 1.4em;
+    text-align: center;
+    font: 1.3rem/1 $font-display;
+  }
+
+  &__six {
+    height: 34px;
+    padding: 0 10px;
+    border: 2px solid $yellow;
+    border-radius: 999px;
+    background: none;
+    color: $yellow;
+    font-weight: 700;
+  }
+
+  &[data-qty="0"] &__btn--minus,
+  &[data-qty="0"] &__qty { display: none; }
+}
+
+.picks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.pick {
+  padding: 10px;
+  border: 1px solid $line;
+  border-radius: 10px;
+  background: $coal-2;
+  font-size: .9rem;
+}
+
+.btn-add {
+  padding: 12px;
+  border: 0;
+  border-radius: 999px;
+  background: $red;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba($red, .45);
+
+  &:active { transform: scale(.96); }
+}
+
+// Bolita que vuela al carrito
+.fly {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border-radius: 50%;
+  background: $yellow;
+  box-shadow: 0 0 12px $yellow;
+  pointer-events: none;
+}

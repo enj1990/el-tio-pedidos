@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>El Tío · Pedí online</title>
+  <meta name="description" content="Lomos, hamburguesas, pizzas y empanadas caseras. Armá tu pedido y mandalo por WhatsApp.">
+  <meta name="theme-color" content="#0b0b0b">
+  <!-- Vista previa al compartir el link -->
+  <meta property="og:title" content="El Tío · ¡El verdadero sabor casero!">
+  <meta property="og:description" content="Elegí, confirmá y mandá tu pedido por WhatsApp en un minuto.">
+  <meta property="og:image" content="https://enj1990.github.io/el-tio-pedidos/assets/img/hamburguesa.jpg">
+  <meta property="og:url" content="https://enj1990.github.io/el-tio-pedidos/">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="is-locked">
+
+  <!-- Portada: instrucción simple + botón -->
+  <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+    <img class="intro__bg" src="assets/img/hamburguesa.jpg" alt="">
+    <div class="intro__content">
+      <img class="intro__logo" src="assets/img/logo.jpg" alt="El Tío" width="140" height="140">
+      <p class="intro__kicker">¡El verdadero sabor casero!</p>
+      <h1 class="intro__title" id="intro-title">Pedí en<br><span>1 minuto</span></h1>
+      <ol class="intro__steps">
+        <li><b>1</b> Tocá <i>+</i> en lo que quieras</li>
+        <li><b>2</b> Revisá tu pedido</li>
+        <li><b>3</b> Envialo por WhatsApp</li>
+      </ol>
+      <button class="intro__go" id="go" type="button">Pedir ahora</button>
+    </div>
+  </div>
+
+  <header class="top">
+    <img class="top__logo" src="assets/img/logo.jpg" alt="" width="40" height="40">
+    <p class="top__name">El Tío <span>Lomos · Pizzas · Empanadas</span></p>
+    <a class="top__wa" href="https://wa.me/5493512264116" aria-label="Escribinos por WhatsApp">351 226 4116</a>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Categorías"></nav>
+
+  <main class="panels" id="panels"></main>
+
+  <button class="cartbar" id="cartbar" type="button" hidden>
+    <span class="cartbar__count" id="cartbar-count"></span>
+    <span class="cartbar__cta">Ver mi pedido →</span>
+    <strong class="cartbar__total" id="cartbar-total" aria-live="polite"></strong>
+  </button>
+
+  <dialog class="sheet" id="cart" aria-labelledby="cart-title">
+    <form class="sheet__inner" id="checkout">
+      <div class="sheet__head">
+        <h2 id="cart-title">Tu pedido</h2>
+        <button type="button" class="sheet__close" id="close" aria-label="Cerrar" autofocus>×</button>
+      </div>
+
+      <div id="cart-lines"></div>
+      <p class="sheet__total">Total <strong id="cart-total"></strong></p>
+
+      <label class="field">
+        <span>Tu nombre</span>
+        <input name="name" required autocomplete="name" placeholder="Ej: Juan">
+      </label>
+
+      <fieldset class="seg">
+        <legend>¿Cómo lo recibís?</legend>
+        <label><input type="radio" name="delivery" value="retiro" checked><span>Retiro en el local</span></label>
+        <label><input type="radio" name="delivery" value="delivery"><span>Delivery</span></label>
+      </fieldset>
+
+      <label class="field field--address">
+        <span>Dirección</span>
+        <input name="address" autocomplete="street-address" placeholder="Calle, número, barrio">
+      </label>
+
+      <fieldset class="seg">
+        <legend>¿Cómo pagás?</legend>
+        <label><input type="radio" name="pay" value="Efectivo" checked><span>Efectivo</span></label>
+        <label><input type="radio" name="pay" value="Transferencia"><span>Transferencia</span></label>
+      </fieldset>
+
+      <label class="field">
+        <span>Nota (opcional)</span>
+        <textarea name="note" rows="2" placeholder="Ej: lomo con ajíes, hamburguesa sin tomate"></textarea>
+      </label>
+
+      <button class="send" id="send" type="submit">Enviar pedido por WhatsApp</button>
+      <p class="sheet__hint">Se abre WhatsApp con tu pedido listo. Solo tocá enviar.</p>
+      <button type="button" class="link" id="clear">Vaciar pedido</button>
+    </form>
+  </dialog>
+
+  <script src="js/menu.js" defer></script>
+  <script src="js/order.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

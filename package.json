@@ -1,0 +1,12 @@
+{
+  "name": "el-tio-pedidos",
+  "private": true,
+  "scripts": {
+    "build": "sass scss/main.scss css/main.css --style=compressed --no-source-map",
+    "watch": "sass --watch scss/main.scss css/main.css",
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "sass": "^1.80.0"
+  }
+}

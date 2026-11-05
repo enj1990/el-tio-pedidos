@@ -1,0 +1,34 @@
+@use 'sass:meta';
+@use 'sass:string';
+
+// Colores de los folletos de El Tío.
+$black: #0b0b0b;
+$coal: #161616;
+$coal-2: #222;
+$line: #2e2e2e;
+$red: #e30f1b;
+$red-dark: #a30a12;
+$orange: #f26a1b;
+$yellow: #ffd400;
+$white: #fff;
+$muted: #b3aca5;
+$whatsapp: #1fa855;
+$whatsapp-dark: #137a3c;
+
+$font-display: 'Anton', Impact, sans-serif;
+$font-brush: 'Permanent Marker', cursive;
+$font-body: 'Barlow', system-ui, sans-serif;
+
+$radius: 14px;
+$gutter: 16px;
+$max: 960px;
+
+// Trazo de pincel como el de los títulos del folleto.
+@function brush($color) {
+  $c: '%23' + string.slice(meta.inspect($color), 2);
+  @return url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath fill='#{$c}' d='M6 12 38 5l84 5 80-7 94 6-8 13 10 13-7 15-84 6-80-4-72 6-47-6 5-12L1 27z'/%3E%3C/svg%3E");
+}
+
+@mixin wide {
+  @media (min-width: 640px) { @content; }
+}
