@@ -231,7 +231,19 @@ form.addEventListener('submit', e => {
     note: f.note.value.trim()
   };
   store.set('eltio-cliente', { name: data.name, address: data.address });
-  window.location.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(buildMessage(cart, data))}`;
+  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(buildMessage(cart, data))}`;
+  // Primero el cartel de gracias, después WhatsApp. Si el navegador frena el salto, queda el botón.
+  dialog.close();
+  $('#thanks-wa').href = url;
+  $('#thanks').hidden = false;
+  setTimeout(() => { window.location.href = url; }, calm ? 800 : 2400);
+});
+
+$('#again').addEventListener('click', () => {
+  cart = [];
+  update();
+  $('#thanks').hidden = true;
+  show(0);
 });
 
 /* ---------- Inicio ---------- */

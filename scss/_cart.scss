@@ -202,3 +202,30 @@
   &:active { transform: translateY(3px); box-shadow: 0 2px 0 $whatsapp-dark; }
   &:disabled { opacity: .4; cursor: not-allowed; }
 }
+
+// Retiro en el local: dirección + cómo llegar (solo con "Retiro" elegido).
+.pickup {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin: -4px 0 14px;
+  padding: 10px 12px;
+  border-left: 4px solid $orange;
+  border-radius: 0 12px 12px 0;
+  background: rgba($orange, .1);
+  font-size: .9rem;
+
+  p { flex: 1; }
+
+  &__btn {
+    flex: none;
+    padding: 9px 12px;
+    border: 2px solid $white;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: .85rem;
+    text-decoration: none;
+  }
+}
+
+.sheet:has([value="retiro"]:checked) .pickup { display: flex; }

@@ -1,0 +1,95 @@
+@use 'tokens' as *;
+
+// Cartel "¡Gracias por elegirnos!" al enviar el pedido.
+.thanks {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: $gutter;
+  background: rgba($black, .94);
+  animation: fade .3s ease-out;
+
+  &__box {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 380px);
+    text-align: center;
+  }
+
+  &__logo {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    border: 4px solid $white;
+    box-shadow: 0 0 0 6px $red, 0 18px 40px rgba($red, .5);
+    animation: pop-in .7s cubic-bezier(.3, 1.6, .5, 1) both, wiggle 2.4s 1s ease-in-out infinite;
+  }
+
+  &__title {
+    font: 2.9rem/1 $font-display;
+    text-transform: uppercase;
+    animation: rise-in .5s .25s both;
+
+    span {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 6px 18px 10px;
+      background: brush($red) center / 100% 100% no-repeat;
+      clip-path: inset(0 100% 0 0);
+      animation: paint .5s .6s ease-out forwards;
+    }
+  }
+
+  &__text {
+    margin: 18px 0 22px;
+    color: $muted;
+    animation: rise-in .5s .9s both;
+
+    b { color: $white; }
+  }
+
+  &__wa {
+    display: block;
+    padding: 16px;
+    border-radius: 14px;
+    background: $whatsapp;
+    box-shadow: 0 5px 0 $whatsapp-dark;
+    font: 1.2rem/1 $font-display;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    text-decoration: none;
+    animation: rise-in .5s 1.1s both;
+  }
+
+  // Papelitos con los colores del folleto
+  &__confetti i {
+    position: absolute;
+    top: -20px;
+    width: 10px;
+    height: 16px;
+    border-radius: 2px;
+    background: $red;
+    animation: drop 2.6s linear infinite;
+
+    @for $n from 1 through 10 {
+      &:nth-child(#{$n}) {
+        left: ($n * 9.5 - 4) * 1%;
+        animation-delay: ($n * 37 % 10) * .2s;
+        animation-duration: 2.2s + ($n % 4) * .35s;
+        @if $n % 3 == 1 { background: $yellow; }
+        @if $n % 3 == 2 { background: $orange; }
+      }
+    }
+  }
+}
+
+@keyframes fade { from { opacity: 0; } }
+@keyframes pop-in { from { transform: scale(0) rotate(-20deg); } }
+@keyframes wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-6deg); } 75% { transform: rotate(6deg); } }
+@keyframes rise-in { from { transform: translateY(20px); opacity: 0; } }
+@keyframes paint { to { clip-path: inset(0 0 0 0); } }
+@keyframes drop { to { transform: translateY(110vh) rotate(540deg); } }

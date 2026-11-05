@@ -27,6 +27,7 @@
       <img class="intro__logo" src="assets/img/logo.jpg" alt="El Tío" width="140" height="140">
       <p class="intro__kicker">¡El verdadero sabor casero!</p>
       <h1 class="intro__title" id="intro-title">Pedí en<br><span>1 minuto</span></h1>
+      <p class="intro__address">📍 Duarte Quirós 3590, Local 2 · Córdoba</p>
       <ol class="intro__steps">
         <li><b>1</b> Tocá <i>+</i> en lo que quieras</li>
         <li><b>2</b> Revisá tu pedido</li>
@@ -38,8 +39,11 @@
 
   <header class="top">
     <img class="top__logo" src="assets/img/logo.jpg" alt="" width="40" height="40">
-    <p class="top__name">El Tío <span>Lomos · Pizzas · Empanadas</span></p>
-    <a class="top__wa" href="https://wa.me/5493512264116" aria-label="Escribinos por WhatsApp">351 226 4116</a>
+    <p class="top__name">El Tío <span>📍 Duarte Quirós 3590, Local 2 · Córdoba</span></p>
+    <div class="top__actions">
+      <a class="top__btn top__btn--wa" href="https://wa.me/5493512264116">WhatsApp</a>
+      <a class="top__btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Duarte+Quir%C3%B3s+3590%2C+C%C3%B3rdoba%2C+Argentina" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
   </header>
 
   <nav class="tabs" id="tabs" aria-label="Categorías"></nav>
@@ -82,6 +86,11 @@
         <label><input type="radio" name="delivery" value="delivery"><span>Delivery</span></label>
       </fieldset>
 
+      <div class="pickup">
+        <p>📍 Retirás en <b>Duarte Quirós 3590, Local 2</b> · Córdoba</p>
+        <a class="pickup__btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Duarte+Quir%C3%B3s+3590%2C+C%C3%B3rdoba%2C+Argentina" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+
       <label class="field field--address">
         <span>Dirección</span>
         <input name="address" autocomplete="street-address" placeholder="Calle, número, barrio">
@@ -103,6 +112,18 @@
       <button type="button" class="link" id="clear">Vaciar pedido</button>
     </form>
   </dialog>
+
+  <!-- Cartel final antes de pasar a WhatsApp -->
+  <div class="thanks" id="thanks" role="alertdialog" aria-modal="true" aria-labelledby="thanks-title" hidden>
+    <div class="thanks__confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="thanks__box">
+      <img class="thanks__logo" src="assets/img/logo.jpg" alt="" width="96" height="96">
+      <h2 class="thanks__title" id="thanks-title">¡Gracias por<br><span>elegirnos!</span></h2>
+      <p class="thanks__text">Te llevamos a WhatsApp con tu pedido listo.<br>Solo tocá <b>Enviar</b>.</p>
+      <a class="thanks__wa" id="thanks-wa" href="https://wa.me/5493512264116">Abrir WhatsApp</a>
+      <button type="button" class="link" id="again">Hacer otro pedido</button>
+    </div>
+  </div>
 
   <script src="js/menu.js" defer></script>
   <script src="js/order.js" defer></script>

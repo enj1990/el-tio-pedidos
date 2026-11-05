@@ -4,29 +4,45 @@
 
 .top {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   max-width: $max;
   margin: 0 auto;
-  padding: calc(10px + env(safe-area-inset-top)) $gutter 6px;
+  padding: calc(10px + env(safe-area-inset-top)) $gutter 8px;
 
   &__logo { width: 40px; height: 40px; border-radius: 50%; border: 2px solid $white; }
 
   &__name {
     flex: 1;
+    min-width: 0;
     font: 1.5rem/1 $font-brush;
 
-    span { display: block; margin-top: 2px; font: 600 .72rem/1 $font-body; letter-spacing: .08em; text-transform: uppercase; color: $muted; }
+    span { display: block; margin-top: 4px; font: 600 .78rem/1.2 $font-body; color: $white; }
   }
 
-  &__wa {
-    padding: 7px 12px;
+  &__actions {
+    display: flex;
+    gap: 8px;
+
+    // en celular bajan a una fila propia, dos botones del mismo ancho
+    @media (max-width: 560px) { flex-basis: 100%; }
+  }
+
+  &__btn {
+    flex: 1;
+    padding: 9px 14px;
+    border: 2px solid $white;
     border-radius: 999px;
-    background: $whatsapp;
     font-weight: 700;
-    font-size: .8rem;
+    font-size: .85rem;
+    text-align: center;
     text-decoration: none;
     white-space: nowrap;
+
+    &--wa { border-color: $whatsapp; background: $whatsapp; }
+
+    &:active { transform: scale(.96); }
   }
 }
 

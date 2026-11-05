@@ -68,6 +68,13 @@
     }
   }
 
+  &__address {
+    margin: -10px 0 18px;
+    font-weight: 600;
+    font-size: .95rem;
+    animation: slide .5s .8s both;
+  }
+
   &__steps {
     display: grid;
     gap: 10px;
@@ -147,6 +154,7 @@
   @media (max-height: 760px) {
     &__logo { width: 84px; height: 84px; margin-bottom: 8px; }
     &__title { margin: 4px 0 14px; font-size: 2.6rem; }
+    &__address { margin: -6px 0 12px; }
     &__steps { gap: 6px; margin-bottom: 16px; }
     &__steps li { padding: 7px 12px; font-size: .95rem; }
     &__go { padding: 14px; font-size: 1.4rem; }
