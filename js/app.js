@@ -237,6 +237,7 @@ form.addEventListener('submit', e => {
 /* ---------- Inicio ---------- */
 
 render();
+$('#year').textContent = new Date().getFullYear();
 const cliente = store.get('eltio-cliente', {});
 f.name.value = cliente.name || '';
 f.address.value = cliente.address || '';

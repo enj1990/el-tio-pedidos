@@ -1,0 +1,26 @@
+@use 'tokens' as *;
+
+// Crédito del estudio: discreto, en gris, para no competir con la marca de El Tío.
+.credits {
+  max-width: $max;
+  margin: 40px auto 0;
+  padding: 18px $gutter 8px;
+  border-top: 1px solid $line;
+  text-align: center;
+  color: rgba($muted, .7);
+  font-size: .72rem;
+  letter-spacing: .04em;
+
+  &__by {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    text-transform: uppercase;
+
+    img { width: 22px; height: 22px; opacity: .85; }
+
+    strong { color: $muted; font-weight: 700; letter-spacing: .1em; }
+  }
+
+  &__legal { margin-top: 6px; }
+}
